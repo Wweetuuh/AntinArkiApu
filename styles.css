@@ -5,4 +5,21 @@
   .nav-item {
     font-size: 25px; /* Adjust the font size for the navbar items */
   }
-  
+  .carousel-inner img {
+    width: auto; /* Säilytä kuvan suhde */
+    margin: auto; /* Keskistää kuva */
+}
+/* Musta väri navigointinapeille */
+.carousel-control-prev, .carousel-control-next {
+  color: black !important; /* Musta väri */
+}
+
+/* Harmaa väri aktiiviselle navigointinapille */
+.carousel-control-prev.active, .carousel-control-next.active {
+  color: black !important; /* Harmaa väri */
+}
+
+/* Harmaa väri hover-tilassa oleville navigointinapeille */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  color: black !important; /* Harmaa väri */
+}
