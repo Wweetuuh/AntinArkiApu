@@ -1,14 +1,15 @@
+//funktio tarjouspyynnön kiinteistön tiedot lomakkeen näyttämiselle
 function showPropertyForm() {
   var name = document.getElementById('inputName').value;
   var phoneNumber = document.getElementById('inputPhoneNumber').value;
   var email = document.getElementById('inputEmail').value;
-   
+    // Tarkistetaan, että pakolliset kentät on täytetty
   if (name == '' || phoneNumber == '' || email == '') {
     $('#errorModal').modal('show');
     return;
   }
 
-
+//Piilotetaan tilaajan tiedot ja näytetään kiinteistön tiedot lomake
   document.getElementById('quoteForm').style.display = 'none'; // Hide the quote form
   document.getElementById('propertyForm').style.display = 'block'; // Show the property form
 }
@@ -17,15 +18,24 @@ function showPropertyForm() {
 function submitButtonPressed() {
   console.log('Submit button pressed');
 
+
+  //Tarkistetaan, ettei päivämäärä ole menneisyydessä
+  var dateTimeInput = document.getElementById('dateTime');
+  var selectedDateTime = new Date(dateTimeInput.value);
+  var currentDate = new Date();
+  if (selectedDateTime < currentDate) {
+    $('#errorDateModal').modal('show');
+    return;
+  }
+ //kutsutaan funktiota, joka lähettää sähköpostin
   SendOfferEmail();
 }
 
-  // Alusta EmailJS
 
 
 
 
-  // Function to send the email
+  // Sähköpostin lähetysfunktio
   function SendOfferEmail() {
     // Kerää lomakkeen tiedot
     var name = document.getElementById('inputName').value;
@@ -59,7 +69,7 @@ function submitButtonPressed() {
 
     console.log(message);
 
-    // Lähetä viesti EmailJS:n avulla
+    // Kootaan emailjs:n kutsufunktion parametrit
     var templateParams = {
       from_name: name,
       to_name: 'antin arkiapu',
@@ -68,17 +78,19 @@ function submitButtonPressed() {
 
     // Lähetä viesti EmailJS:n avulla
     emailjs.send('service_7qcchke', 'template_puwe9vi', templateParams)
+    // Lähetys onnistui
       .then(function(response) {
         console.log('Sähköposti lähetetty!', response);
         $('#successModal').modal('show');
         showContent('etusivu');
-        // Voit lisätä tähän koodia onnistuneen lähetyksen käsittelyä varten, esim. näyttää kiitosviestin käyttäjälle
       })
+      // Lähetys epäonnistui
       .catch(function(error) {
         console.log('Sähköpostin lähetys epäonnistui:', error);
         $('#errorModal').modal('show');
       });
   }
+  //funktio sivun navbaarin toiminnallisuudelle
   function showContent(id) {
     // Piilotetaan kaikki sisältölohkot
     var contentSections = document.querySelectorAll('.container');
