@@ -53,8 +53,8 @@ function submitButtonPressed() {
       $('#errorModal').modal('show');
       return; // Lopeta funktio, jos pakollisia kenttiä ei ole täytetty
   }
-
-
+  
+  
     // Muodosta viestin sisältö
     var message = `
       Nimi: ${name}
@@ -77,7 +77,7 @@ function submitButtonPressed() {
     };
 
     // Lähetä viesti EmailJS:n avulla
-    emailjs.send('service_7qcchke', 'template_puwe9vi', templateParams)
+    emailjs.send('service_93uzzt7', 'template_i3hppzs', templateParams)
     // Lähetys onnistui
       .then(function(response) {
         console.log('Sähköposti lähetetty!', response);
